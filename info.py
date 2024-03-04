@@ -5,4 +5,4 @@ SESSION      = ""
 DATABASE_URI = ""
 LOG_CHANNEL  =
 ADMIN        = 919169586
-CHANNEL      = "NobiDeveloper"
+CHANNEL      = ""
