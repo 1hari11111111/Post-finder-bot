@@ -4,5 +4,5 @@ BOT_TOKEN    = ""
 SESSION      = ""
 DATABASE_URI = ""
 LOG_CHANNEL  =
-ADMIN        = 1255023013
+ADMIN        = 919169586
 CHANNEL      = "NobiDeveloper"
