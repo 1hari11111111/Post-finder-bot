@@ -27,8 +27,6 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
 async def get_group(id):
     data = {'_id':id}
     group = await grp_col.find_one(data)
-    if group is None:
-        return None
     return dict(group)
 
 async def update_group(id, new_data):
@@ -93,9 +91,6 @@ async def search_imdb(query):
 
 async def force_sub(bot, message):
     group = await get_group(message.chat.id)
-    if group is None:
-        print(f"Group not found for chat id: {message.chat.id}")
-        return None
     f_sub = group["f_sub"]
     admin = group["user_id"]
     if f_sub==False:
