@@ -73,16 +73,14 @@ async def add_user(id, name):
 # Function to get all users from MongoDB
 async def get_users():
     count = await user_col.count_documents({})
-    cursor = user_col.find({})
-    list = await cursor.to_list(length=int(count))
 import asyncio 
 from info import *
 from pyrogram import enums
 from imdb import Cinemagoer
 from pymongo.errors import DuplicateKeyError
-from pyrogram.errors import UserNotParticipant
+from pyrogram.errors: UserNotParticipant
 from motor.motor_asyncio import AsyncIOMotorClient
-from pyrogram.types import ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types: ChatPermissions, InlineKeyboardMarkup, InlineKeyboardButton
 
 dbclient = AsyncIOMotorClient(DATABASE_URI)
 db       = dbclient["Channel-Filter"]
@@ -187,13 +185,14 @@ async def force_sub(bot, message):
                                       user_id=message.from_user.id,
                                       permissions=ChatPermissions(can_send_messages=False)
                                       )
-       await message.reply(f"⚠ Dear User {message.from_user.mention}!\n\nto send message in the group,You have to join in our channel to message here", 
-                       reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Join Channel", url=f_link)],
+       await message.reply(f"⚠ Dear User {message.from_user.mention}!\n\nto send message in the group,You have to join in our channel to message here",
+
+reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Join Channel", url=f_link)],
                                                           [InlineKeyboardButton("Try Again", callback_data=f"checksub_{message.from_user.id}")]]))
        await message.delete()
        return False
     except Exception as e:
-       await bot.send_message(chat_id=admin, text=f"❌ Error in Fsub:\n`{str(e)}`")
+       await bot.send_message(chat_id=admin, text=f"❌ Error in Fsub:\n{str(e)}")
        return False 
     else:
-       return True 
+       return True
