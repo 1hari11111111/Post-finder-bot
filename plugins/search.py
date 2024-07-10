@@ -11,9 +11,8 @@ async def search(bot, message):
     f_sub = await force_sub(bot, message)
     if f_sub==False:
        return     
-    group_data = await get_group(message.chat.id)
-    channels = group_data.get("channels", [])
-    if not channels:
+    channels = (await get_group(message.chat.id))["channels"]
+    if bool(channels)==False:
        return     
     if message.text.startswith("/"):
        return    
@@ -27,7 +26,7 @@ async def search(bot, message):
                if name in results:
                   continue 
                results += f"<b>🎬 {name}\n {msg.link} </b>\n\n"                                                      
-       if not results:
+       if bool(results)==False:
           movies = await search_imdb(query)
           buttons = []
           for movie in movies: 
@@ -38,9 +37,10 @@ async def search(bot, message):
           msg = await message.reply_text(text=head+results, disable_web_page_preview=True)
        _time = (int(time()) + (5*60))
        await save_dlt_message(msg, _time)
-    except Exception as e:
-       await bot.send_message(chat_id=admin, text=f"Error: {str(e)}")
+    except:
+       pass
        
+
 
 @Client.on_callback_query(filters.regex(r"^recheck"))
 async def recheck(bot, update):
@@ -48,16 +48,15 @@ async def recheck(bot, update):
     try:      
        typed = update.message.reply_to_message.from_user.id
     except:
-       return await update.message.delete()       
+       return await update.message.delete(2)       
     if clicked != typed:
        return await update.answer("ᴛʜɪꜱ ɪꜱ ɴᴏᴛ ꜰᴏʀ ʏᴏᴜ", show_alert=True)
 
-    m = await update.message.edit("<b>ꜱᴇᴀʀᴄʜɪɴɢ ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ ♻️</b>")
-    id = update.data.split("_")[-1]
-    query = await search_imdb(id)
-    group_data = await get_group(update.message.chat.id)
-    channels = group_data.get("channels", [])
-    head = "<b>ɪ ʜᴀᴠᴇ ꜱᴇᴀʀᴄʜᴇᴅ ᴍᴏᴠɪᴇ ᴡɪᴛʜ ʏᴏᴜʀ ᴡʀᴏɴɢ ꜱᴘᴇʟʟɪɴɢ...\nʙᴜᴛ ᴛᴀᴋᴇ ᴄᴀʀᴇ ɴᴇxᴛ ᴛɪᴍᴇ 😋</b>\n\n"
+    m=await update.message.edit("<b>ꜱᴇᴀʀᴄʜɪɴɢ ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ ♻️</b>")
+    id      = update.data.split("_")[-1]
+    query   = await search_imdb(id)
+    channels = (await get_group(update.message.chat.id))["channels"]
+    head    = "<b>ɪ ʜᴀᴠᴇ ꜱᴇᴀʀᴄʜᴇᴅ ᴍᴏᴠɪᴇ ᴡɪᴛʜ ʏᴏᴜʀ ᴡʀᴏɴɢ ꜱᴘᴇʟʟɪɴɢ...\nʙᴜᴛ ᴛᴀᴋᴇ ᴄᴀʀᴇ ɴᴇxᴛ ᴛɪᴍᴇ 😋</b>\n\n"
     results = ""
     try:
        for channel in channels:
@@ -66,7 +65,7 @@ async def recheck(bot, update):
                if name in results:
                   continue 
                results += f"<b>🎬 {name}\n {msg.link} </b>\n\n"
-       if not results:          
+       if bool(results)==False:          
           return await update.message.edit("<b>⚠️ ɴᴏ ʀᴇꜱᴜʟᴛꜱ ꜰᴏᴜɴᴅ !!\nᴘʟᴇᴀꜱᴇ ʀᴇǫᴜᴇꜱᴛ ᴛᴏ ɢʀᴏᴜᴘ ᴀᴅᴍɪɴ 👇🏻</b>", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🧑‍✈️  ʀᴇǫᴜᴇꜱᴛ ᴛᴏ ᴀᴅᴍɪɴ  🧑‍✈️", callback_data=f"request_{id}")]]))
        await update.message.edit(text=head+results, disable_web_page_preview=True)
     except Exception as e:
@@ -83,12 +82,11 @@ async def request(bot, update):
     if clicked != typed:
        return await update.answer("ᴛʜɪꜱ ɪꜱ ɴᴏᴛ ꜰᴏʀ ʏᴏᴜ", show_alert=True)
 
-    group_data = await get_group(update.message.chat.id)
-    admin = group_data.get("user_id")
-    id = update.data.split("_")[1]
-    name = await search_imdb(id)
-    url = "https://www.imdb.com/title/tt"+id
-    text = f"#Request\n\nɴᴀᴍᴇ - {name}\nɪᴍᴅʙ - {url}"
+    admin = (await get_group(update.message.chat.id))["user_id"]
+    id    = update.data.split("_")[1]
+    name  = await search_imdb(id)
+    url   = "https://www.imdb.com/title/tt"+id
+    text  = f"#Request\n\nɴᴀᴍᴇ - {name}\nɪᴍᴅʙ - {url}"
     await bot.send_message(chat_id=admin, text=text, disable_web_page_preview=True)
     await update.answer("ʀᴇǫᴜᴇꜱᴛ ꜱᴇɴᴅ ᴛᴏ ᴀᴅᴍɪɴ  ✅", show_alert=True)
-    await update.message.delete()
+    await update.message.delete(60)
