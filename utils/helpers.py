@@ -25,10 +25,8 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
        pass
 
 async def get_group(id):
-    data = {'_id': id}
+    data = {'_id':id}
     group = await grp_col.find_one(data)
-    if group is None:
-        return {}
     return dict(group)
 
 async def update_group(id, new_data):
@@ -93,12 +91,9 @@ async def search_imdb(query):
 
 async def force_sub(bot, message):
     group = await get_group(message.chat.id)
-    if not group:
-        return False
-
-    f_sub = group.get("f_sub", False)
-    admin = group.get("user_id", None)
-    if not f_sub or admin is None:
+    f_sub = group["f_sub"]
+    admin = group["user_id"]
+    if f_sub==False:
        return True
     if message.from_user is None:
        return True 
@@ -121,8 +116,7 @@ async def force_sub(bot, message):
        await message.delete()
        return False
     except Exception as e:
-       if admin:
-           await bot.send_message(chat_id=admin, text=f"❌ Error in Fsub:\n`{str(e)}`")
+       await bot.send_message(chat_id=admin, text=f"❌ Error in Fsub:\n`{str(e)}`")
        return False 
     else:
-       return True
+       return True 
