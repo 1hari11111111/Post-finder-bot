@@ -25,9 +25,11 @@ async def add_group(group_id, group_name, user_name, user_id, channels, f_sub, v
        pass
 
 async def get_group(id):
-    data = {'_id':id}
+    data = {'_id': id}
     group = await grp_col.find_one(data)
-    return dict(group) if group else {}
+    if group is None:
+        return {}
+    return dict(group)
 
 async def update_group(id, new_data):
     data = {"_id":id}
@@ -91,16 +93,19 @@ async def search_imdb(query):
 
 async def force_sub(bot, message):
     group = await get_group(message.chat.id)
+    if not group:
+        return False
+
     f_sub = group.get("f_sub", False)
-    admin = group.get("user_id")
-    if f_sub == False:
+    admin = group.get("user_id", None)
+    if not f_sub or admin is None:
        return True
     if message.from_user is None:
        return True 
     try:
        f_link = (await bot.get_chat(f_sub)).invite_link
        member = await bot.get_chat_member(f_sub, message.from_user.id)
-       if member.status == enums.ChatMemberStatus.BANNED:
+       if member.status==enums.ChatMemberStatus.BANNED:
           await message.reply(f"Sorry {message.from_user.mention}!\n You are banned in our channel, you will be banned from here within 10 seconds")
           await asyncio.sleep(10)
           await bot.ban_chat_member(message.chat.id, message.from_user.id)
@@ -116,7 +121,8 @@ async def force_sub(bot, message):
        await message.delete()
        return False
     except Exception as e:
-       await bot.send_message(chat_id=admin, text=f"❌ Error in Fsub:\n`{str(e)}`")
+       if admin:
+           await bot.send_message(chat_id=admin, text=f"❌ Error in Fsub:\n`{str(e)}`")
        return False 
     else:
        return True
