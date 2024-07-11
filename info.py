@@ -2,7 +2,7 @@ API_ID       = 26042863
 API_HASH     = "d4fabc00b0345cd3f0ccdc0c9b750f6e"
 BOT_TOKEN    = "6934545157:AAEdEtjjzTslvgPrDXEMT1AVpQrvDiscfsc"
 SESSION      = "BQD6zg0AaveMVeowcSUn9CLL_e11uezUNlYgXVNnOKe-lFnH5C_XMfN0H-Oewmfa1pHQ-RTJgrc3R-XmYp8BV9pPTN7xTCo-DSL23HpVg1rZYvNi1N2FGFtSnsAcTNjUXgJVQkNf58C8NtxThn3fc81LNGbimVIzygUmcoRDgCMIxRmse-iX_m_t4aMT8IOBcJ92el83cJisBszMmHHk72rPIeXElpgZR3R3Q98gvnYYgdwfjjXM_YrtttalmGlmjMwhuegtXDo3yUQSAC9mJ7ZwZ1LNZg15AOa9hbb0YqpJCX2XazYTevlpOxv1R3NOkoPe8ATwBLcuz23JLJb6C8c13IdF2AAAAAGpxhs1AA"
-DATABASE_URI = "mongodb+srv://SGBACKUP4:SGBACKUP@cluster0.gnbo1sq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+DATABASE_URI = "mongodb+srv://SGBACKUP4:SGBACKUP@cluster0.zjpcla3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 LOG_CHANNEL  = -1001994332079
 ADMIN        = 919169586
 CHANNEL      = ""
