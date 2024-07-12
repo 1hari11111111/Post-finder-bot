@@ -1,8 +1,8 @@
 API_ID       = 26042863
 API_HASH     = "d4fabc00b0345cd3f0ccdc0c9b750f6e"
-BOT_TOKEN    = "6934545157:AAEdEtjjzTslvgPrDXEMT1AVpQrvDiscfsc"
-SESSION      = "BQD6zg0AaveMVeowcSUn9CLL_e11uezUNlYgXVNnOKe-lFnH5C_XMfN0H-Oewmfa1pHQ-RTJgrc3R-XmYp8BV9pPTN7xTCo-DSL23HpVg1rZYvNi1N2FGFtSnsAcTNjUXgJVQkNf58C8NtxThn3fc81LNGbimVIzygUmcoRDgCMIxRmse-iX_m_t4aMT8IOBcJ92el83cJisBszMmHHk72rPIeXElpgZR3R3Q98gvnYYgdwfjjXM_YrtttalmGlmjMwhuegtXDo3yUQSAC9mJ7ZwZ1LNZg15AOa9hbb0YqpJCX2XazYTevlpOxv1R3NOkoPe8ATwBLcuz23JLJb6C8c13IdF2AAAAAGpxhs1AA"
-DATABASE_URI = "mongodb+srv://SGBACKUP4:SGBACKUP@cluster0.zjpcla3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-LOG_CHANNEL  = -1001994332079
+BOT_TOKEN    = "6934545157:AAGHlmQX9GcfFj02Msm72KFli9gmXODSE6w"
+SESSION      = "BQHFENsAVqvrzPzkcCjpj0QgzqDK359NDsaw3DnEhPpTF0txLuXDNJutnYV85XtKMG-OROUnxsY7eNsrjyrOcsH0UBfYh85YquqmkudkH7xxbrAiEU0GlqQzq-NUQ2HYB2x2d-9wvSsbVZgS9M_bBC8tNyXpTmTQ67U5N24hD0J-BhOAmNaj9U6OQKl9EwE80cNbsqVw-Inz5SNlRH4j352WrEq8flrFyZdmL7-pSBzaMijoFbOP-FaogmQ3yDBNxXiTyC0rPn19ufohnBtS6-0CeNhf4gqSJME1oOocfCPIzUmOpWv0L0iGgWHM9AvpwcXOnJowsGVVIS8XiuFIHkg1tFZezQAAAAFwASoqAA"
+DATABASE_URI = "mongodb+srv://subhajitghosh7777777:ABJtWJizF74zkVZg@cluster0.3v5w06k.mongodb.net/?retryWrites=true&w=majority"
+LOG_CHANNEL  = "-1001994332079"
 ADMIN        = 919169586
 CHANNEL      = ""
